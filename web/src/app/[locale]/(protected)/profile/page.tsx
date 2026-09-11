@@ -1,0 +1,10 @@
+'use client';
+import {zodResolver} from '@hookform/resolvers/zod';
+import {useTranslations} from 'next-intl';
+import {useForm} from 'react-hook-form';
+import {toast} from 'sonner';
+import {z} from 'zod';
+import {useAuth} from '@/features/auth/auth-context';
+import {api} from '@/lib/api/client';
+const schema=z.object({currentPassword:z.string().min(8),newPassword:z.string().min(8)});type Form=z.infer<typeof schema>;
+export default function Profile(){const t=useTranslations();const{user,logout}=useAuth();const{register,handleSubmit,reset,formState:{errors,isSubmitting}}=useForm<Form>({resolver:zodResolver(schema)});const submit=async(v:Form)=>{try{await api.post('/auth/change-password',v);toast.success(t('toast.passwordChanged'));reset();await logout()}catch(e){toast.error(e instanceof Error?e.message:t('common.error'))}};return <section><h1 className="text-2xl font-bold mb-6">{t('profile.title')}</h1><div className="grid lg:grid-cols-2 gap-6"><article className="card p-6"><h2 className="font-bold mb-4">{t('profile.information')}</h2><p className="text-sm text-gray-500">{t('fields.email')}</p><p className="font-medium mb-4">{user?.email}</p><p className="text-sm text-gray-500">{t('fields.role')}</p><p className="font-medium mb-4">{user&&t(`roles.${user.role}`)}</p><p className="text-sm text-gray-500">{t('fields.company')}</p><p className="font-medium">{user?.company?.name??'—'}</p></article><form className="card p-6" onSubmit={handleSubmit(submit)}><h2 className="font-bold mb-4">{t('profile.changePassword')}</h2><label className="label">{t('fields.currentPassword')}</label><input type="password" className="input" {...register('currentPassword')}/>{errors.currentPassword&&<p className="error">{t('validation.min8')}</p>}<label className="label mt-4">{t('fields.newPassword')}</label><input type="password" className="input" {...register('newPassword')}/>{errors.newPassword&&<p className="error">{t('validation.min8')}</p>}<button className="btn btn-primary mt-5" disabled={isSubmitting}>{t('common.actions.save')}</button></form></div></section>}

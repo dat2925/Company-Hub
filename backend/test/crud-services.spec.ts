@@ -1,0 +1,10 @@
+import { Role } from '@prisma/client';
+import { CompaniesService } from '../src/companies/companies.service';
+import { EmployeesService, ProjectsService } from '../src/resources/resources.service';
+const admin={id:'admin-a',email:'admin@a.com',role:Role.ADMIN,companyId:'company-a'};
+describe('CRUD services',()=>{
+  it('creates a company with normalized code',async()=>{const create=jest.fn().mockResolvedValue({id:'1'});const service=new CompaniesService({company:{create}} as never);await service.create({name:'A',code:'acme',email:'a@a.com',phone:'1',address:'x'});expect(create).toHaveBeenCalledWith({data:expect.objectContaining({code:'ACME'})})});
+  it('creates projects inside the current company',async()=>{const create=jest.fn().mockResolvedValue({id:'p'});const service=new ProjectsService({project:{create}} as never);await service.create(admin,{name:'Project',code:'p1'});expect(create).toHaveBeenCalledWith({data:expect.objectContaining({companyId:'company-a',createdById:'admin-a',code:'P1'})})});
+  it('creates employee data inside the current company',async()=>{const employeeCreate=jest.fn().mockResolvedValue({id:'e'});const prisma={department:{findFirst:jest.fn()},$transaction:jest.fn((fn:(tx:unknown)=>unknown)=>fn({employee:{create:employeeCreate},user:{create:jest.fn()}}))};const service=new EmployeesService(prisma as never);await service.create(admin,{employeeCode:'e1',fullName:'Employee',email:'e@a.com'});expect(employeeCreate).toHaveBeenCalledWith({data:expect.objectContaining({companyId:'company-a',employeeCode:'E1'})})});
+  it('deletes an employee profile and deactivates its referenced account',async()=>{const employeeDelete=jest.fn();const userUpdate=jest.fn();const prisma={employee:{findFirst:jest.fn().mockResolvedValue({id:'e',userId:'u'})},$transaction:jest.fn((fn:(tx:unknown)=>unknown)=>fn({employee:{delete:employeeDelete},user:{update:userUpdate}}))};const service=new EmployeesService(prisma as never);await service.remove(admin,'e');expect(employeeDelete).toHaveBeenCalledWith({where:{id:'e'}});expect(userUpdate).toHaveBeenCalledWith({where:{id:'u'},data:{isActive:false}})});
+});

@@ -1,0 +1,23 @@
+{
+  "app":{"name":"Hệ thống quản lý công ty","shortName":"Company Hub"},
+  "auth":{"login":"Đăng nhập","subtitle":"Đăng nhập để quản lý doanh nghiệp của bạn","tagline":"Một nơi đơn giản để quản lý đội ngũ và công việc mỗi ngày.","demoHint":"Tài khoản demo đã được điền sẵn. Mật khẩu: Demo@123"},
+  "nav":{"dashboard":"Tổng quan","companies":"Công ty","departments":"Phòng ban","positions":"Chức vụ","employees":"Nhân viên","meetings":"Cuộc họp","projects":"Dự án","issues":"Công việc","bulletins":"Bảng tin","notifications":"Thông báo","profile":"Hồ sơ","logout":"Đăng xuất"},
+  "common":{"loading":"Đang tải...","saving":"Đang lưu...","error":"Đã xảy ra lỗi. Vui lòng thử lại.","empty":"Chưa có dữ liệu","search":"Nhập từ khóa tìm kiếm","searchButton":"Tìm","select":"Vui lòng chọn","deleteConfirm":"Bạn có chắc muốn xóa mục này? Hành động này không thể hoàn tác.","actions":{"title":"Thao tác","create":"Thêm mới","createAdmin":"Tạo quản trị công ty","view":"Xem","edit":"Sửa","delete":"Xóa","save":"Lưu","cancel":"Hủy"},"modal":{"create":"Thêm mới","admin":"Tạo quản trị công ty","edit":"Chỉnh sửa","view":"Chi tiết","delete":"Xác nhận xóa"}},
+  "validation":{"required":"Trường này là bắt buộc","email":"Email không hợp lệ","min8":"Phải có ít nhất 8 ký tự"},
+  "toast":{"saved":"Đã lưu thành công","deleted":"Đã xóa thành công","adminCreated":"Đã tạo tài khoản quản trị công ty","passwordChanged":"Đổi mật khẩu thành công. Vui lòng đăng nhập lại."},
+  "pagination":{"summary":"Trang {page}/{total} · {items} mục"},
+  "roles":{"SUPER_ADMIN":"Quản trị hệ thống","ADMIN":"Quản trị công ty","EMPLOYEE":"Nhân viên"},
+  "statuses":{"ACTIVE":"Hoạt động","INACTIVE":"Không hoạt động","PLANNING":"Đang lập kế hoạch","COMPLETED":"Hoàn thành","CANCELLED":"Đã hủy","SCHEDULED":"Đã lên lịch","OPEN":"Mới","IN_PROGRESS":"Đang thực hiện","DONE":"Đã xong","LOW":"Thấp","MEDIUM":"Trung bình","HIGH":"Cao","URGENT":"Khẩn cấp"},
+  "dashboard":{"title":"Tổng quan","welcome":"Xin chào, {name}","recentCompanies":"Công ty mới","recentBulletins":"Bảng tin gần đây","recentNotifications":"Thông báo gần đây","cards":{"totalCompanies":"Tổng số công ty","activeCompanies":"Công ty hoạt động","totalDepartments":"Tổng phòng ban","totalPositions":"Tổng chức vụ","totalEmployees":"Tổng nhân viên","totalProjects":"Tổng dự án","upcomingMeetings":"Cuộc họp sắp tới","totalBulletins":"Tổng bảng tin","totalNotifications":"Tổng thông báo"}},
+  "companies":{"title":"Công ty","description":"Quản lý các doanh nghiệp trên hệ thống"},
+  "departments":{"title":"Phòng ban","description":"Quản lý cơ cấu phòng ban"},
+  "positions":{"title":"Chức vụ","description":"Tạo chức vụ theo từng phòng ban"},
+  "employees":{"title":"Nhân viên","description":"Quản lý hồ sơ và tài khoản nhân viên"},
+  "meetings":{"title":"Cuộc họp","description":"Lên lịch và quản lý cuộc họp"},
+  "projects":{"title":"Dự án","description":"Theo dõi các dự án của công ty"},
+  "issues":{"title":"Công việc dự án","description":"Tạo issue trong dự án và phân công cho nhân viên"},
+  "bulletins":{"title":"Bảng tin","description":"Chia sẻ tin tức nội bộ"},
+  "notifications":{"title":"Thông báo","description":"Quản lý thông báo trong công ty"},
+  "profile":{"title":"Hồ sơ","information":"Thông tin cá nhân","changePassword":"Đổi mật khẩu"},
+  "fields":{"name":"Tên","code":"Mã","email":"Email","phone":"Điện thoại","address":"Địa chỉ","logoUrl":"URL logo","status":"Trạng thái","description":"Mô tả","employeeCode":"Mã nhân viên","fullName":"Họ và tên","departmentId":"Phòng ban","department":"Phòng ban","positionId":"Chức vụ","position":"Chức vụ","hireDate":"Ngày vào làm","password":"Mật khẩu tài khoản","title":"Tiêu đề","location":"Địa điểm","meetingUrl":"Liên kết họp","startAt":"Bắt đầu","endAt":"Kết thúc","startDate":"Ngày bắt đầu","endDate":"Ngày kết thúc","projectId":"Dự án","project":"Dự án","assigneeId":"Người được giao","assignee":"Người được giao","priority":"Độ ưu tiên","dueDate":"Hạn hoàn thành","content":"Nội dung","publishedAt":"Ngày đăng","message":"Thông điệp","createdAt":"Ngày tạo","role":"Vai trò","company":"Công ty","currentPassword":"Mật khẩu hiện tại","newPassword":"Mật khẩu mới"}
+}
