@@ -24,7 +24,8 @@ export class AuthService {
   async login(dto: LoginDto) {
     const user = await this.prisma.user.findUnique({ where: { email: dto.email.toLowerCase() } });
     if (!user?.isActive || !(await argon2.verify(user.passwordHash, dto.password))) throw new UnauthorizedException('Invalid email or password');
-    return { user: this.safeUser(user), ...(await this.tokens(user)) };
+    const profile = await this.me({ id: user.id, email: user.email, role: user.role, companyId: user.companyId });
+    return { user: { ...this.safeUser(user), employee: profile?.employee ?? null, company: profile?.company ?? null }, ...(await this.tokens(user)) };
   }
   async refresh(token: string) {
     let payload: { sub: string };
@@ -45,7 +46,7 @@ export class AuthService {
     return { message: 'Logged out' };
   }
   async me(user: AuthUser) {
-    return this.prisma.user.findUnique({ where: { id: user.id }, select: { id: true, email: true, role: true, companyId: true, isActive: true, createdAt: true, employee: true, company: { select: { id: true, name: true, code: true, logoUrl: true } } } });
+    return this.prisma.user.findUnique({ where: { id: user.id }, select: { id: true, email: true, role: true, companyId: true, isActive: true, createdAt: true, employee: { include: { departmentPermission: true } }, company: { select: { id: true, name: true, code: true, logoUrl: true } } } });
   }
   async changePassword(user: AuthUser, dto: ChangePasswordDto) {
     const current = await this.prisma.user.findUniqueOrThrow({ where: { id: user.id } });

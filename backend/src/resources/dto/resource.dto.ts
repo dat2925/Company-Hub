@@ -1,6 +1,6 @@
 import { ApiProperty, ApiPropertyOptional, PartialType } from '@nestjs/swagger';
 import { EmployeeStatus, IssuePriority, IssueStatus, MeetingStatus, ProjectStatus } from '@prisma/client';
-import { IsDate, IsEmail, IsEnum, IsOptional, IsString, IsUrl, IsUUID, MinLength } from 'class-validator';
+import { IsBoolean, IsDate, IsEmail, IsEnum, IsOptional, IsString, IsUrl, IsUUID, MinLength } from 'class-validator';
 import { Type } from 'class-transformer';
 
 export class CreateDepartmentDto {
@@ -9,6 +9,13 @@ export class CreateDepartmentDto {
   @ApiPropertyOptional() @IsOptional() @IsString() description?: string;
 }
 export class UpdateDepartmentDto extends PartialType(CreateDepartmentDto) {}
+
+export class UpdateDepartmentPermissionDto {
+  @ApiProperty() @IsBoolean() canCreate!: boolean;
+  @ApiProperty() @IsBoolean() canUpdate!: boolean;
+  @ApiProperty() @IsBoolean() canDelete!: boolean;
+  @ApiProperty() @IsBoolean() canAssignPosition!: boolean;
+}
 
 export class CreatePositionDto {
   @ApiProperty() @IsUUID() departmentId!: string;

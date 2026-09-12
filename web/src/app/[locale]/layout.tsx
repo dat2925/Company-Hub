@@ -12,7 +12,7 @@ export default async function LocaleLayout({children,params}:{children:React.Rea
   if(!hasLocale(routing.locales,locale))notFound();
   const messages=await getMessages();
   return (
-    <html lang={locale}>
+    <html lang={locale} suppressHydrationWarning>
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />

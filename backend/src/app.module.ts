@@ -8,9 +8,11 @@ import { ResourcesModule } from './resources/resources.module';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { ApiResponseInterceptor } from './common/api-response.interceptor';
 import { ApiExceptionFilter } from './common/api-exception.filter';
+import { AttendanceModule } from './attendance/attendance.module';
+import { PayrollModule } from './payroll/payroll.module';
 
 @Module({
-  imports: [ConfigModule.forRoot({ isGlobal: true }), PrismaModule, AuthModule, CompaniesModule, ResourcesModule, DashboardModule],
+  imports: [ConfigModule.forRoot({ isGlobal: true }), PrismaModule, AuthModule, CompaniesModule, ResourcesModule, DashboardModule, AttendanceModule, PayrollModule],
   providers: [
     { provide: APP_INTERCEPTOR, useClass: ApiResponseInterceptor },
     { provide: APP_FILTER, useClass: ApiExceptionFilter },
