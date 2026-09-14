@@ -9,15 +9,15 @@ export const impactEntrySchema = z.object({
     'LEARNING',
     'LEADERSHIP',
     'OTHER'
-  ], { required_error: 'validation.required' }),
+  ]),
   title: z.string().min(2, 'validation.required'),
   description: z.string().optional(),
   occurredOn: z.string().min(1, 'validation.required'),
   projectId: z.string().optional(),
   sourceIssueId: z.string().optional(),
   metrics: z.record(z.string(), z.union([z.string(), z.number(), z.boolean()])).optional(),
-  visibility: z.enum(['PRIVATE', 'MANAGER', 'COMPANY']).default('MANAGER'),
-  isHighlighted: z.boolean().default(false)
+  visibility: z.enum(['PRIVATE', 'MANAGER', 'COMPANY']),
+  isHighlighted: z.boolean().optional()
 });
 
 export type ImpactEntryFormValues = z.infer<typeof impactEntrySchema>;
@@ -26,7 +26,7 @@ export const recognitionSchema = z.object({
   receiverEmployeeId: z.string().min(1, 'validation.required'),
   skillId: z.string().optional(),
   message: z.string().min(3, 'validation.required'),
-  visibility: z.enum(['PRIVATE', 'MANAGER', 'COMPANY']).default('COMPANY')
+  visibility: z.enum(['PRIVATE', 'MANAGER', 'COMPANY'])
 });
 
 export type RecognitionFormValues = z.infer<typeof recognitionSchema>;
@@ -44,7 +44,7 @@ export const employeeGoalSchema = z.object({
 export type EmployeeGoalFormValues = z.infer<typeof employeeGoalSchema>;
 
 export const generateReportSchema = z.object({
-  period: z.enum(['WEEKLY', 'MONTHLY', 'QUARTERLY', 'CUSTOM'], { required_error: 'validation.required' }),
+  period: z.enum(['WEEKLY', 'MONTHLY', 'QUARTERLY', 'CUSTOM']),
   periodStart: z.string().min(1, 'validation.required'),
   periodEnd: z.string().min(1, 'validation.required'),
   selfReflection: z.string().optional()

@@ -8,12 +8,14 @@ import {
   FeedItem,
   Recognition,
   EmployeeGoal,
-  ImpactReport,
+  ImpactReport
+} from './types';
+import {
   ImpactEntryFormValues,
   RecognitionFormValues,
   EmployeeGoalFormValues,
   GenerateReportFormValues
-} from './types';
+} from './schemas';
 
 // --- Dashboard & Suggestions ---
 export function useImpactDashboard(params?: { from?: string; to?: string; employeeId?: string }) {

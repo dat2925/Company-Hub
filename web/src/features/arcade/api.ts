@@ -83,7 +83,7 @@ export function useCurrentRoom() {
 export function useRoomAction(roomId: string, action: 'ready' | 'leave' | 'finish') {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: () => api.post(`/arcade/rooms/${roomId}/${action}`),
+    mutationFn: () => api.post(`/arcade/rooms/${roomId}/${action}`, {}),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: arcadeQueryKeys.roomCurrent() });
       if (action === 'leave' || action === 'finish') {
@@ -131,7 +131,7 @@ export function useUpdateChallenge(challengeId: string) {
 export function useChallengeAction(challengeId: string, action: 'publish' | 'close') {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: () => api.post(`/arcade/challenges/${challengeId}/${action}`),
+    mutationFn: () => api.post(`/arcade/challenges/${challengeId}/${action}`, {}),
     onSuccess: () => queryClient.invalidateQueries({ queryKey: arcadeQueryKeys.all })
   });
 }
@@ -173,7 +173,7 @@ export function useUpdateMission(missionId: string) {
 export function useMissionAction(missionId: string, action: 'publish' | 'close') {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: () => api.post(`/arcade/missions/${missionId}/${action}`),
+    mutationFn: () => api.post(`/arcade/missions/${missionId}/${action}`, {}),
     onSuccess: () => queryClient.invalidateQueries({ queryKey: arcadeQueryKeys.all })
   });
 }

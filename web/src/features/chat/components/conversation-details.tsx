@@ -50,10 +50,10 @@ export function ConversationDetails({
   });
 
   const memberMutation = useMutation({
-    mutationFn: ({ action, employeeId, role }: { action: 'remove' | 'role' | 'transfer' | 'leave' | 'delete', employeeId?: string, role?: string }) => {
-      if (action === 'remove') return chatApi.removeMember(conversation.id, employeeId);
-      if (action === 'role') return chatApi.updateMemberRole(conversation.id, employeeId, role);
-      if (action === 'transfer') return chatApi.transferOwnership(conversation.id, employeeId);
+    mutationFn: ({ action, employeeId, role }: { action: 'remove' | 'role' | 'transfer' | 'leave' | 'delete', employeeId?: string, role?: 'ADMIN' | 'MEMBER' | 'OWNER' }) => {
+      if (action === 'remove') return chatApi.removeMember(conversation.id, employeeId!);
+      if (action === 'role') return chatApi.updateMemberRole(conversation.id, employeeId!, role as 'ADMIN' | 'MEMBER');
+      if (action === 'transfer') return chatApi.transferOwnership(conversation.id, employeeId!);
       if (action === 'leave') return chatApi.leaveConversation(conversation.id);
       if (action === 'delete') return chatApi.deleteConversation(conversation.id);
       return Promise.reject();

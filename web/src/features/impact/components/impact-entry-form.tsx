@@ -24,8 +24,8 @@ export function ImpactEntryForm({ entry, onClose, prefill }: Props) {
     resolver: zodResolver(
       impactEntrySchema.extend({
         metricsArray: impactEntrySchema.shape.metrics.optional() // handled manually below
-      }) as unknown as Parameters<typeof zodResolver>[0]
-    ),
+      })
+    ) as any,
     defaultValues: {
       type: entry?.type || prefill?.type || 'DELIVERY',
       title: entry?.title || prefill?.title || '',

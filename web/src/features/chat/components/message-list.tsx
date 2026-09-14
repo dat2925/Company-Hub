@@ -32,6 +32,7 @@ export function MessageList({
       page: pageParam as number, 
       pageSize: 30 
     }),
+    initialPageParam: 1,
     getNextPageParam: (lastPage: { meta?: { page: number; totalPages: number } }) => {
       if (!lastPage.meta) return undefined;
       return lastPage.meta.page < lastPage.meta.totalPages ? lastPage.meta.page + 1 : undefined;
@@ -136,7 +137,6 @@ export function MessageList({
                     <ReactionPicker 
                       messageId={msg.id} 
                       conversationId={conversation.id}
-                      currentReactions={msg.reactions}
                       currentUserId={user?.employee?.id || ''}
                     />
                     <button onClick={() => onReply(msg)} className="p-1 hover:bg-slate-100 rounded text-slate-500" title={t('message.reply')}>
@@ -217,10 +217,10 @@ export function MessageList({
                   {msg.reactions && msg.reactions.length > 0 && (
                     <div className={`flex flex-wrap gap-1 mt-1 ${isMine ? 'justify-end' : 'justify-start'}`}>
                       {Object.entries(
-                        msg.reactions.reduce((acc, curr) => {
+                        msg.reactions.reduce((acc: Record<string, number>, curr: import('../types').ChatReaction) => {
                           acc[curr.emoji] = (acc[curr.emoji] || 0) + 1;
                           return acc;
-                        }, {} as Record<string, number>)
+                        }, {})
                       ).map(([emoji, count]) => {
                         const hasReacted = msg.reactions.some(r => r.emoji === emoji && r.employeeId === user?.employee?.id);
                         return (
@@ -232,7 +232,7 @@ export function MessageList({
                             }`}
                           >
                             <span>{emoji}</span>
-                            <span className="font-bold">{count}</span>
+                            <span className="font-bold">{count as number}</span>
                           </button>
                         );
                       })}

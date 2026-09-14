@@ -23,7 +23,7 @@ export const updateConversationSchema = z.object({
 export type UpdateConversationInput = z.infer<typeof updateConversationSchema>;
 
 export const sendMessageSchema = z.object({
-  type: z.enum(['TEXT', 'IMAGE', 'FILE']).optional().default('TEXT'),
+  type: z.enum(['TEXT', 'IMAGE', 'FILE']),
   content: z.string().max(5000, 'Message is too long').optional(),
   attachmentUrl: z.string().url('Invalid URL').or(z.literal('')).optional(),
   attachmentName: z.string().optional(),

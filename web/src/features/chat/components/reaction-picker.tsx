@@ -37,7 +37,7 @@ export function ReactionPicker({
               if (hasReacted) {
                 newReactions = newReactions.filter(r => !(r.emoji === emoji && r.employeeId === currentUserId));
               } else {
-                newReactions.push({ emoji, employeeId: currentUserId });
+                newReactions.push({ emoji, employeeId: currentUserId } as import('../types').ChatReaction);
               }
               return { ...msg, reactions: newReactions };
             }

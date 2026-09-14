@@ -4,11 +4,13 @@ import { useAuth } from '@/features/auth/auth-context';
 import { AdminImpactView } from '@/features/impact/admin-impact-view';
 import { EmployeeImpactView } from '@/features/impact/employee-impact-view';
 import { redirect } from '@/i18n/navigation';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 
 export default function ImpactPage() {
   const { user, loading } = useAuth();
   const t = useTranslations();
+
+  const locale = useLocale();
 
   if (loading) {
     return (
@@ -22,7 +24,7 @@ export default function ImpactPage() {
   }
 
   if (!user) {
-    redirect('/login');
+    redirect({ href: '/login', locale });
     return null;
   }
 

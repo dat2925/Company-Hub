@@ -41,6 +41,7 @@ export function ConversationList({
       search: debouncedSearch || undefined,
       type: filterType === 'ALL' ? undefined : filterType
     }),
+    initialPageParam: 1,
     getNextPageParam: (lastPage: { meta?: { page: number; totalPages: number } }) => {
       if (!lastPage.meta) return undefined;
       return lastPage.meta.page < lastPage.meta.totalPages ? lastPage.meta.page + 1 : undefined;

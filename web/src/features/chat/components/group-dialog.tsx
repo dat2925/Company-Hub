@@ -111,9 +111,8 @@ export function GroupDialog({
             </div>
             {errors.memberIds && <p className="text-rose-500 text-xs mt-1">{errors.memberIds.message}</p>}
           </div>
-
           <div className="flex justify-end gap-2 pt-4">
-            <Button type="button" variant="outline" onClick={onClose}>{tCommon('actions.cancel')}</Button>
+            <Button type="button" variant="secondary" onClick={onClose}>{tCommon('actions.cancel')}</Button>
             <Button type="submit" disabled={isSubmitting}>{tCommon('actions.create')}</Button>
           </div>
         </form>
