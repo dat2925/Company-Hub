@@ -14,6 +14,7 @@ import {
 import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 import { toast } from 'sonner';
+import { Portal } from '@/components/ui/portal';
 import { useAuth } from '@/features/auth/auth-context';
 import {
   useCalculatePayroll,
@@ -267,8 +268,9 @@ interface PayrollDetailModalProps {
 
 function PayrollDetailModal({ payroll, onClose, t, formatCurrency }: PayrollDetailModalProps) {
   return (
-    <div className="modal-bg">
-      <div className="modal bg-white rounded-[2rem] p-8 max-w-lg w-full shadow-2xl relative overflow-hidden">
+    <Portal>
+      <div className="modal-bg">
+        <div className="modal bg-white rounded-[2rem] p-8 max-w-lg w-full shadow-2xl relative overflow-hidden">
         <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-indigo-500 via-purple-500 to-fuchsia-500"></div>
         <div className="flex justify-between items-center mb-6">
           <h2 className="text-2xl font-black text-slate-800">
@@ -327,6 +329,7 @@ function PayrollDetailModal({ payroll, onClose, t, formatCurrency }: PayrollDeta
         </div>
       </div>
     </div>
+    </Portal>
   );
 }
 
@@ -458,8 +461,9 @@ function SalaryProfileModal({ profile, onClose, t, employeeOptions }: SalaryProf
   };
 
   return (
-    <div className="modal-bg">
-      <div className="modal bg-white rounded-[2rem] p-8 max-w-md w-full shadow-2xl">
+    <Portal>
+      <div className="modal-bg">
+        <div className="modal bg-white rounded-[2rem] p-8 max-w-md w-full shadow-2xl">
         <div className="flex justify-between items-center mb-6">
           <h2 className="text-2xl font-black text-slate-800">
             {t('salaryProfile.title')}
@@ -551,5 +555,6 @@ function SalaryProfileModal({ profile, onClose, t, employeeOptions }: SalaryProf
         </form>
       </div>
     </div>
+    </Portal>
   );
 }

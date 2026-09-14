@@ -8,24 +8,53 @@ export type AttendanceStatus = 'PRESENT' | 'LATE' | 'HALF_DAY' | 'ABSENT' | 'PAI
 export interface Attendance extends Item {
   companyId: string;
   employeeId: string;
+  shiftAssignmentId: string | null;
   workDate: string;
-  checkIn?: string;
-  checkOut?: string;
+  checkIn: string | null;
+  checkOut: string | null;
   status: AttendanceStatus;
   workedMinutes: number;
+  regularMinutes: number;
+  scheduledMinutes: number;
   overtimeMinutes: number;
-  note?: string;
+  earlyArrivalMinutes: number;
+  lateArrivalMinutes: number;
+  earlyLeaveMinutes: number;
+  lateLeaveMinutes: number;
+  hasOvertime: boolean;
+  note: string | null;
   employee?: {
     id: string;
     employeeCode: string;
     fullName: string;
   };
+  shiftAssignment?: {
+    id: string;
+    shift: {
+      id: string;
+      code: string;
+      name: string;
+      startTime: string;
+      endTime: string;
+      breakMinutes: number;
+      lateGraceMinutes: number;
+      earlyLeaveGraceMinutes: number;
+      overtimeAllowed: boolean;
+      overtimeThresholdMinutes: number;
+    }
+  } | null;
 }
 
 export interface AttendanceSummary {
-  records: Attendance[];
+  records: number;
+  overtimeRecords: number;
   workedMinutes: number;
+  regularMinutes: number;
   overtimeMinutes: number;
+  earlyArrivalMinutes: number;
+  lateArrivalMinutes: number;
+  earlyLeaveMinutes: number;
+  lateLeaveMinutes: number;
   byStatus: Partial<Record<AttendanceStatus, number>>;
 }
 
@@ -53,26 +82,31 @@ export function useCheckOut() {
   });
 }
 
-export function useAttendanceSummary(month: string, employeeId?: string) {
+export function useAttendanceSummary(params: { month?: string; from?: string; to?: string; employeeId?: string }) {
   return useQuery({
-    queryKey: ['attendance', 'summary', month, employeeId],
+    queryKey: ['attendance', 'summary', params],
     queryFn: () => {
-      const params = new URLSearchParams({ month });
-      if (employeeId) params.append('employeeId', employeeId);
-      return api.get<AttendanceSummary>(`/attendance/summary?${params.toString()}`);
+      const searchParams = new URLSearchParams();
+      if (params.month) searchParams.append('month', params.month);
+      if (params.from) searchParams.append('from', params.from);
+      if (params.to) searchParams.append('to', params.to);
+      if (params.employeeId) searchParams.append('employeeId', params.employeeId);
+      return api.get<AttendanceSummary>(`/attendance/summary?${searchParams.toString()}`);
     }
   });
 }
 
-export function useAttendanceList(params: { page: number; pageSize: number; month: string; employeeId?: string }) {
+export function useAttendanceList(params: { page: number; pageSize: number; month?: string; from?: string; to?: string; employeeId?: string }) {
   return useQuery({
     queryKey: ['attendance', 'list', params],
     queryFn: () => {
       const searchParams = new URLSearchParams({
         page: String(params.page),
-        pageSize: String(params.pageSize),
-        month: params.month
+        pageSize: String(params.pageSize)
       });
+      if (params.month) searchParams.append('month', params.month);
+      if (params.from) searchParams.append('from', params.from);
+      if (params.to) searchParams.append('to', params.to);
       if (params.employeeId) searchParams.append('employeeId', params.employeeId);
       return api.get<Attendance[]>(`/attendance?${searchParams.toString()}`);
     }

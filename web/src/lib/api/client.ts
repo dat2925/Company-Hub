@@ -1,4 +1,4 @@
-const API_URL=process.env.NEXT_PUBLIC_API_URL??'http://localhost:3000/api/v1';
+const API_URL = typeof window === 'undefined' ? (process.env.API_URL || process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000/api/v1') : (process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:3000/api/v1');
 export class ApiError extends Error{constructor(message:string,public status:number){super(message)}}
 type ApiEnvelope<T>={success:boolean;data:T;meta?:{page:number;pageSize:number;totalItems:number;totalPages:number};message?:string};
 let refreshPromise:Promise<boolean>|null=null;

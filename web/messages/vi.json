@@ -1,14 +1,14 @@
 {
   "app":{"name":"Hệ thống quản lý công ty","shortName":"Company Hub"},
   "auth":{"login":"Đăng nhập","subtitle":"Đăng nhập để quản lý doanh nghiệp của bạn","tagline":"Một nơi đơn giản để quản lý đội ngũ và công việc mỗi ngày.","demoHint":"Tài khoản demo đã được điền sẵn. Mật khẩu: Demo@123"},
-  "nav":{"dashboard":"Tổng quan","companies":"Công ty","departments":"Phòng ban","positions":"Chức vụ","employees":"Nhân viên","meetings":"Cuộc họp","projects":"Dự án","issues":"Công việc","bulletins":"Bảng tin","notifications":"Thông báo","attendance":"Chấm công","payrolls":"Bảng lương","profile":"Hồ sơ","logout":"Đăng xuất"},
+  "nav":{"dashboard":"Tổng quan","chat":"Tin nhắn","companies":"Công ty","departments":"Phòng ban","positions":"Chức vụ","employees":"Nhân viên","shifts":"Ca làm việc","meetings":"Cuộc họp","projects":"Dự án","issues":"Công việc","bulletins":"Bảng tin","notifications":"Thông báo","attendance":"Chấm công","payrolls":"Bảng lương","profile":"Hồ sơ","logout":"Đăng xuất","talent":"Năng lực & Cơ hội","impact":"Thành tích của tôi","arcade":"Góc giải lao"},
   "common":{"welcome":"Xin chào","loading":"Đang tải...","saving":"Đang lưu...","error":"Đã xảy ra lỗi. Vui lòng thử lại.","empty":"Chưa có dữ liệu","search":"Nhập từ khóa tìm kiếm","searchButton":"Tìm","select":"Vui lòng chọn","deleteConfirm":"Bạn có chắc muốn xóa mục này? Hành động này không thể hoàn tác.","actions":{"title":"Thao tác","create":"Thêm mới","createAdmin":"Tạo quản trị công ty","view":"Xem","edit":"Sửa","delete":"Xóa","save":"Lưu","cancel":"Hủy"},"modal":{"create":"Thêm mới","admin":"Tạo quản trị công ty","edit":"Chỉnh sửa","view":"Chi tiết","delete":"Xác nhận xóa"}},
-  "validation":{"required":"Trường này là bắt buộc","email":"Email không hợp lệ","min8":"Phải có ít nhất 8 ký tự"},
+  "validation":{"required":"Trường này là bắt buộc","email":"Email không hợp lệ","min8":"Phải có ít nhất 8 ký tự","break":"Phải từ 0 đến 720","grace":"Phải từ 0 đến 180","threshold":"Phải từ 0 đến 240","timeFormat":"Định dạng phải là HH:mm"},
   "toast":{"saved":"Đã lưu thành công","deleted":"Đã xóa thành công","adminCreated":"Đã tạo tài khoản quản trị công ty","passwordChanged":"Đổi mật khẩu thành công. Vui lòng đăng nhập lại."},
   "pagination":{"summary":"Trang {page}/{total} · {items} mục"},
   "roles":{"SUPER_ADMIN":"Quản trị hệ thống","ADMIN":"Quản trị công ty","EMPLOYEE":"Nhân viên"},
   "statuses":{"ACTIVE":"Hoạt động","INACTIVE":"Không hoạt động","PLANNING":"Đang lập kế hoạch","COMPLETED":"Hoàn thành","CANCELLED":"Đã hủy","SCHEDULED":"Đã lên lịch","OPEN":"Mới","IN_PROGRESS":"Đang thực hiện","DONE":"Đã xong","LOW":"Thấp","MEDIUM":"Trung bình","HIGH":"Cao","URGENT":"Khẩn cấp","PRESENT":"Có mặt","LATE":"Đi muộn","HALF_DAY":"Nửa ngày","ABSENT":"Vắng mặt","PAID_LEAVE":"Nghỉ có lương","UNPAID_LEAVE":"Nghỉ không lương","DRAFT":"Bản nháp","FINALIZED":"Đã chốt"},
-  "dashboard":{"title":"Tổng quan","subtitle":"Trung tâm điều khiển hệ thống","welcome":"Xin chào, {name}","recentCompanies":"Công ty mới","recentBulletins":"Bảng tin gần đây","recentNotifications":"Thông báo gần đây","cards":{"totalCompanies":"Tổng số công ty","activeCompanies":"Công ty hoạt động","totalDepartments":"Tổng phòng ban","totalPositions":"Tổng chức vụ","totalEmployees":"Tổng nhân viên","totalProjects":"Tổng dự án","upcomingMeetings":"Cuộc họp sắp tới","totalBulletins":"Tổng bảng tin","totalNotifications":"Tổng thông báo"}},
+  "dashboard":{"title":"Tổng quan","subtitle":"Trung tâm điều khiển hệ thống","welcome":"Xin chào, {name}","heroDescription":"Chào mừng trở lại trung tâm điều hành. Giám sát thời gian thực, tốc độ phát triển, và điểm nhấn đội ngũ ngay trong tầm tay.","roleLabel":"Vai trò","dragonEngineActive":"Dragon Engine đang hoạt động","recentCompanies":"Công ty mới","recentBulletins":"Bảng tin gần đây","recentNotifications":"Thông báo gần đây","cards":{"totalCompanies":"Tổng số công ty","activeCompanies":"Công ty hoạt động","totalDepartments":"Tổng phòng ban","totalPositions":"Tổng chức vụ","totalEmployees":"Tổng nhân viên","totalProjects":"Tổng dự án","upcomingMeetings":"Cuộc họp sắp tới","totalBulletins":"Tổng bảng tin","totalNotifications":"Tổng thông báo"}},
   "companies":{"title":"Công ty","description":"Quản lý các doanh nghiệp trên hệ thống"},
   "departments":{"title":"Phòng ban","description":"Quản lý cơ cấu phòng ban"},
   "departmentDetail":{"back":"Quay lại danh sách phòng ban","notFound":"Không tìm thấy phòng ban hoặc bạn không có quyền truy cập.","tabsLabel":"Nội dung phòng ban","tabs":{"positions":"Chức vụ","employees":"Nhân viên"},"permissions":{"title":"Phân quyền quản lý phòng ban","description":"Cấp quyền thao tác cho từng nhân viên trong phòng ban.","create":"Thêm","update":"Sửa","delete":"Xóa","assignPosition":"Giao chức vụ","saved":"Đã cập nhật quyền phòng ban"}},
@@ -21,8 +21,233 @@
   "bulletins":{"title":"Bảng tin","description":"Chia sẻ tin tức nội bộ"},
   "notifications":{"title":"Thông báo","description":"Quản lý thông báo trong công ty"},
   "profile":{"title":"Hồ sơ","information":"Thông tin cá nhân","changePassword":"Đổi mật khẩu"},
-  "fields":{"name":"Tên","code":"Mã","email":"Email","phone":"Điện thoại","address":"Địa chỉ","logoUrl":"URL logo","status":"Trạng thái","description":"Mô tả","employeeId":"Nhân viên","employeeCode":"Mã nhân viên","fullName":"Họ và tên","departmentId":"Phòng ban","department":"Phòng ban","positionId":"Chức vụ","position":"Chức vụ","hireDate":"Ngày vào làm","password":"Mật khẩu tài khoản","title":"Tiêu đề","location":"Địa điểm","meetingUrl":"Liên kết họp","startAt":"Bắt đầu","endAt":"Kết thúc","startDate":"Ngày bắt đầu","endDate":"Ngày kết thúc","projectId":"Dự án","project":"Dự án","assigneeId":"Người được giao","assignee":"Người được giao","priority":"Độ ưu tiên","dueDate":"Hạn hoàn thành","content":"Nội dung","publishedAt":"Ngày đăng","message":"Thông điệp","createdAt":"Ngày tạo","role":"Vai trò","company":"Công ty","currentPassword":"Mật khẩu hiện tại","newPassword":"Mật khẩu mới","checkIn":"Giờ vào","checkOut":"Giờ ra","workDate":"Ngày làm việc","workedMinutes":"Số phút làm","overtimeMinutes":"Số phút tăng ca","note":"Ghi chú","baseSalary":"Lương cơ bản","allowance":"Phụ cấp","overtimeHourlyRate":"Lương tăng ca/giờ","standardWorkingDays":"Ngày công chuẩn","standardMinutesPerDay":"Số phút/ngày","currency":"Tiền tệ","regularMinutes":"Số phút làm thực tế","paidLeaveMinutes":"Số phút nghỉ có lương","attendancePay":"Lương theo chấm công","overtimePay":"Lương tăng ca","deductions":"Khấu trừ","netSalary":"Thực lĩnh","calculatedAt":"Ngày tính","finalizedAt":"Ngày chốt"},
-  "attendance":{"title":"Chấm công","description":"Quản lý chấm công hàng ngày","checkIn":"Chấm vào","checkOut":"Chấm ra","todayStatus":"Trạng thái hôm nay","summary":"Tổng hợp","totalHours":"Tổng giờ làm","overtime":"Tăng ca","presentDays":"Số ngày có mặt","lateDays":"Số ngày đi muộn","halfDays":"Số ngày làm nửa ngày","absentDays":"Số ngày vắng mặt"},
+  "fields":{"name":"Tên","code":"Mã","email":"Email","phone":"Điện thoại","address":"Địa chỉ","logoUrl":"URL logo","status":"Trạng thái","description":"Mô tả","employeeId":"Nhân viên","employeeCode":"Mã nhân viên","fullName":"Họ và tên","departmentId":"Phòng ban","department":"Phòng ban","positionId":"Chức vụ","position":"Chức vụ","hireDate":"Ngày vào làm","password":"Mật khẩu tài khoản","title":"Tiêu đề","location":"Địa điểm","meetingUrl":"Liên kết họp","startAt":"Bắt đầu","endAt":"Kết thúc","startDate":"Ngày bắt đầu","endDate":"Ngày kết thúc","projectId":"Dự án","project":"Dự án","assigneeId":"Người được giao","assignee":"Người được giao","priority":"Độ ưu tiên","dueDate":"Hạn hoàn thành","content":"Nội dung","publishedAt":"Ngày đăng","message":"Thông điệp","createdAt":"Ngày tạo","role":"Vai trò","company":"Công ty","currentPassword":"Mật khẩu hiện tại","newPassword":"Mật khẩu mới","checkIn":"Giờ vào","checkOut":"Giờ ra","workDate":"Ngày làm việc","workedMinutes":"Số phút làm","overtimeMinutes":"Số phút tăng ca","note":"Ghi chú","baseSalary":"Lương cơ bản","allowance":"Phụ cấp","overtimeHourlyRate":"Lương tăng ca/giờ","standardWorkingDays":"Ngày công chuẩn","standardMinutesPerDay":"Số phút/ngày","currency":"Tiền tệ","regularMinutes":"Số phút làm thực tế","paidLeaveMinutes":"Số phút nghỉ có lương","attendancePay":"Lương theo chấm công","overtimePay":"Lương tăng ca","deductions":"Khấu trừ","netSalary":"Thực lĩnh","calculatedAt":"Ngày tính","finalizedAt":"Ngày chốt","startTime":"Giờ bắt đầu","endTime":"Giờ kết thúc","breakMinutes":"Số phút nghỉ giữa ca","lateGraceMinutes":"Đi muộn cho phép (phút)","earlyLeaveGraceMinutes":"Về sớm cho phép (phút)","overtimeAllowed":"Cho phép OT","overtimeThresholdMinutes":"Ngưỡng OT tối thiểu (phút)","isActive":"Hoạt động","shiftId":"Ca làm việc","shift":"Ca làm việc","scheduledStartAt":"Bắt đầu dự kiến","scheduledEndAt":"Kết thúc dự kiến","scheduledMinutes":"Số phút dự kiến","earlyArrivalMinutes":"Đi sớm","lateArrivalMinutes":"Đi muộn","earlyLeaveMinutes":"Về sớm","lateLeaveMinutes":"Về muộn"},
+  "attendance":{"title":"Chấm công","description":"Quản lý chấm công hàng ngày","checkIn":"Chấm vào","checkOut":"Chấm ra","todayStatus":"Trạng thái hôm nay","summary":"Tổng hợp","totalHours":"Tổng giờ làm","overtime":"Tăng ca","presentDays":"Số ngày có mặt","lateDays":"Số ngày đi muộn","halfDays":"Số ngày làm nửa ngày","absentDays":"Số ngày vắng mặt","scheduled":"Dự kiến","actual":"Thực tế","difference":"Chênh lệch","earlyArrival":"Đi sớm","lateArrival":"Đi muộn","earlyLeave":"Về sớm","lateLeave":"Về muộn","onTime":"Đúng giờ","noShift":"Chưa phân ca","graceNote":"Hệ thống đã trừ đi thời gian cho phép (grace). OT dựa trên chính sách của ca, không tự tính toán lại ở FE."},
+  "shifts":{"title":"Ca làm việc","description":"Quản lý mẫu ca và phân ca cho nhân viên","tabs":{"shifts":"Mẫu ca","assignments":"Phân ca","mySchedule":"Lịch làm của tôi"},"overnight":"Ca qua đêm","assignSingle":"Phân ca","assignBulk":"Phân ca hàng loạt","bulk":{"daysOfWeek":"Các ngày trong tuần","success":"Đã tạo {created} phân ca. Bỏ qua {skipped}."}},
   "payrolls":{"title":"Bảng lương","description":"Quản lý bảng lương công ty","calculateAll":"Tính lương toàn công ty","recalculate":"Tính lại","finalize":"Chốt lương","calculateConfirm":"Bạn có chắc muốn tính lương cho toàn bộ nhân viên?","finalizeConfirm":"Bạn có chắc muốn chốt bảng lương này? Sau khi chốt sẽ không thể thay đổi.","breakdown":"Chi tiết lương","tabs":{"payrolls":"Bảng lương","config":"Cấu hình lương"}},
-  "salaryProfile":{"title":"Cấu hình lương","description":"Thiết lập mức lương cho nhân viên"}
+  "salaryProfile":{"title":"Cấu hình lương","description":"Thiết lập mức lương cho nhân viên"},
+  "talent":{
+    "title":"Năng lực & Cơ hội",
+    "description":"Quản lý kỹ năng, lộ trình phát triển và cơ hội nội bộ",
+    "tabs":{
+      "riskDashboard":"Tổng quan rủi ro",
+      "employees":"Nhân sự",
+      "projects":"Dự án",
+      "opportunities":"Cơ hội nội bộ",
+      "skills":"Danh mục kỹ năng",
+      "mySkills":"Năng lực của tôi",
+      "myGrowthPlan":"Lộ trình của tôi",
+      "myApplications":"Đơn của tôi"
+    },
+    "skillSource":{
+      "SELF_DECLARED":"Tự khai báo",
+      "MANAGER_VERIFIED":"Quản lý xác nhận",
+      "PROJECT_EVIDENCE":"Bằng chứng dự án",
+      "CERTIFICATION":"Chứng chỉ"
+    },
+    "opportunityType":{
+      "PROJECT_ROLE":"Vai trò dự án",
+      "INTERNAL_POSITION":"Vị trí nội bộ",
+      "SHORT_TERM_MISSION":"Nhiệm vụ ngắn hạn"
+    },
+    "opportunityStatus":{
+      "DRAFT":"Bản nháp",
+      "OPEN":"Đang mở",
+      "CLOSED":"Đã đóng",
+      "CANCELLED":"Đã hủy"
+    },
+    "applicationStatus":{
+      "PENDING":"Đang chờ",
+      "SHORTLISTED":"Qua sơ loại",
+      "ACCEPTED":"Đã chấp nhận",
+      "REJECTED":"Từ chối",
+      "WITHDRAWN":"Đã rút"
+    },
+    "recommendedActions":{
+      "ASSIGN_SKILL_BACKUPS":"Chỉ định người thay thế",
+      "TRANSFER_OPEN_ISSUES":"Bàn giao công việc",
+      "CREATE_KNOWLEDGE_TRANSFER_PLAN":"Tạo kế hoạch chuyển giao"
+    }
+  },
+  "impact":{
+    "title":"Thành tích của tôi",
+    "adminTitle":"Tác động nhân sự",
+    "types":{
+      "DELIVERY":"Bàn giao",
+      "IMPROVEMENT":"Cải tiến",
+      "CUSTOMER_IMPACT":"Tác động khách hàng",
+      "TEAM_SUPPORT":"Hỗ trợ đội nhóm",
+      "LEARNING":"Học tập",
+      "LEADERSHIP":"Dẫn dắt",
+      "OTHER":"Khác"
+    },
+    "visibility":{
+      "PRIVATE":"Chỉ mình tôi",
+      "MANAGER":"Tôi và quản lý",
+      "COMPANY":"Toàn công ty"
+    },
+    "reportPeriod":{
+      "WEEKLY":"Hàng tuần",
+      "MONTHLY":"Hàng tháng",
+      "QUARTERLY":"Hàng quý",
+      "CUSTOM":"Tùy chỉnh"
+    },
+    "reportStatus":{
+      "DRAFT":"Bản nháp",
+      "SUBMITTED":"Đã nộp",
+      "REVIEWED":"Đã duyệt"
+    },
+    "goalStatus":{
+      "ACTIVE":"Đang thực hiện",
+      "COMPLETED":"Hoàn thành",
+      "CANCELLED":"Đã hủy"
+    },
+    "tabs":{
+      "overview":"Tổng quan",
+      "timeline":"Dòng thời gian",
+      "suggestions":"Gợi ý cho bạn",
+      "goals":"Mục tiêu",
+      "recognitions":"Ghi nhận & Bảng tin",
+      "reports":"Báo cáo",
+      "pendingReports":"Báo cáo chờ duyệt"
+    }
+  },
+  "arcade":{
+    "title":"Góc giải lao",
+    "adminTitle":"Quản lý Arcade",
+    "description":"Các hoạt động giải trí ngắn trong giờ",
+    "tabs":{
+      "home":"Trang chủ",
+      "history":"Lịch sử",
+      "challenges":"Thử thách",
+      "missions":"Nhiệm vụ vui",
+      "submissions":"Chờ duyệt",
+      "leaderboard":"Bảng xếp hạng"
+    },
+    "types":{
+      "TRIVIA":"Đố vui",
+      "POLL":"Bình chọn",
+      "CAPTION":"Đặt caption",
+      "GUESS_COLLEAGUE":"Đoán đồng nghiệp"
+    },
+    "modes":{
+      "QUICK_QUIZ":"Quiz nhanh",
+      "ICEBREAKER":"Làm quen vui"
+    },
+    "periods":{
+      "WEEKLY":"Tuần",
+      "MONTHLY":"Tháng",
+      "ALL_TIME":"Toàn thời gian"
+    },
+    "statuses":{
+      "PENDING":"Chờ duyệt",
+      "APPROVED":"Chấp nhận",
+      "REJECTED":"Từ chối"
+    },
+    "badges":{
+      "FIRST_PLAY":"Chơi lần đầu",
+      "QUIZ_ROOKIE":"Tân binh Quiz",
+      "ARCADE_STAR":"Ngôi sao Arcade",
+      "STREAK_3":"Chuỗi 3 ngày",
+      "MISSION_HERO":"Anh hùng nhiệm vụ"
+    },
+    "room":{
+      "matchmake":"Tìm phòng",
+      "waiting":"Đang chờ người chơi...",
+      "ready":"Sẵn sàng",
+      "leave":"Rời phòng",
+      "finish":"Kết thúc",
+      "live":"Đang diễn ra",
+      "code":"Mã phòng:",
+      "players":"Người chơi",
+      "waitingSlot":"Đang chờ...",
+      "activeTitle":"Bạn đã vào phòng!",
+      "activeDesc":"Hãy tận hưởng các câu hỏi cùng đồng nghiệp nhé."
+    },
+    "play":"Chơi ngay",
+    "submit":"Nộp minh chứng",
+    "points":"Điểm",
+    "streak":"Chuỗi",
+    "noKPI":"Chỉ để giải trí, không liên quan đến KPI hay đánh giá hiệu suất",
+    "adminDescription":"Quản lý thử thách, nhiệm vụ và đánh giá nộp minh chứng.",
+    "attention":"Chú ý",
+    "createChallenge":"Tạo thử thách",
+    "createMission":"Tạo nhiệm vụ",
+    "fields":{
+      "title":"Tiêu đề",
+      "type":"Loại",
+      "status":"Trạng thái",
+      "points":"Điểm",
+      "rank":"Hạng",
+      "employee":"Nhân viên",
+      "question":"Câu hỏi",
+      "description":"Mô tả",
+      "startsAt":"Bắt đầu",
+      "endsAt":"Kết thúc",
+      "correctAnswer":"Đáp án đúng",
+      "options":"Lựa chọn",
+      "addOption":"Thêm lựa chọn",
+      "removeOption":"Xoá lựa chọn",
+      "requiresProof":"Yêu cầu minh chứng"
+    },
+    "noChallenges":"Chưa có thử thách nào",
+    "noMissions":"Chưa có nhiệm vụ nào",
+    "pendingSubmissions":"Minh chứng chờ duyệt",
+    "noSubmissions":"Không có minh chứng chờ duyệt",
+    "viewProof":"Xem liên kết minh chứng",
+    "approve":"Duyệt",
+    "reject":"Từ chối",
+    "completed":"Hoàn thành",
+    "proofTextOptional":"Mô tả minh chứng (Tùy chọn)",
+    "proofTextPlaceholder":"Mô tả bạn đã làm gì...",
+    "proofUrlOptional":"Liên kết minh chứng (Tùy chọn)",
+    "challenge":"Thử thách",
+    "submitMission":"Nộp nhiệm vụ",
+    "captionPlaceholder":"Viết caption của bạn..."
+  },
+  "chat": {
+    "title": "Tin nhắn",
+    "search": "Tìm kiếm hội thoại...",
+    "newDirect": "Chat mới",
+    "newGroup": "Tạo nhóm",
+    "empty": "Chưa có cuộc trò chuyện nào",
+    "noAccess": "Không có hồ sơ nhân viên để sử dụng Chat.",
+    "group": {
+      "name": "Tên nhóm",
+      "create": "Tạo nhóm",
+      "edit": "Sửa nhóm",
+      "members": "Thành viên",
+      "leave": "Rời nhóm",
+      "delete": "Xóa nhóm",
+      "transfer": "Chuyển quyền",
+      "addMembers": "Thêm thành viên",
+      "removeMember": "Xóa thành viên",
+      "roles": {
+        "OWNER": "Chủ nhóm",
+        "ADMIN": "Quản trị",
+        "MEMBER": "Thành viên"
+      }
+    },
+    "message": {
+      "placeholder": "Nhập tin nhắn...",
+      "reply": "Trả lời",
+      "edit": "Sửa",
+      "delete": "Xóa",
+      "deleted": "Tin nhắn đã được xóa",
+      "edited": "Đã chỉnh sửa",
+      "attachment": "Đính kèm (URL)"
+    },
+    "details": {
+      "title": "Chi tiết hội thoại",
+      "theme": "Chủ đề",
+      "mute": "Tắt thông báo",
+      "unmute": "Bật thông báo",
+      "muteOptions": {
+        "1h": "1 giờ",
+        "8h": "8 giờ",
+        "1w": "1 tuần",
+        "forever": "Vô thời hạn"
+      }
+    }
+  }
 }

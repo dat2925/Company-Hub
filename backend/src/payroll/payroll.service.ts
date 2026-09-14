@@ -94,13 +94,13 @@ export class PayrollService {
     const { year, month, start, end } = parseMonth(monthValue);
     const existing = await this.prisma.payroll.findUnique({ where: { companyId_employeeId_year_month: { companyId, employeeId: profile.employeeId, year, month } } });
     if (existing?.status === PayrollStatus.FINALIZED) throw new ConflictException(`Payroll for ${profile.employee.employeeCode} is finalized`);
-    const records = await this.prisma.attendance.findMany({ where: { companyId, employeeId: profile.employeeId, workDate: { gte: start, lt: end } }, select: { status: true, workedMinutes: true, overtimeMinutes: true } });
+    const records = await this.prisma.attendance.findMany({ where: { companyId, employeeId: profile.employeeId, workDate: { gte: start, lt: end } }, select: { status: true, workedMinutes: true, regularMinutes: true, scheduledMinutes: true, overtimeMinutes: true } });
     let regularMinutes = 0;
     let paidLeaveMinutes = 0;
     let overtimeMinutes = 0;
     for (const record of records) {
-      if (record.status === AttendanceStatus.PAID_LEAVE) paidLeaveMinutes += profile.standardMinutesPerDay;
-      else if (([AttendanceStatus.PRESENT, AttendanceStatus.LATE, AttendanceStatus.HALF_DAY] as AttendanceStatus[]).includes(record.status)) regularMinutes += Math.min(record.workedMinutes, profile.standardMinutesPerDay);
+      if (record.status === AttendanceStatus.PAID_LEAVE) paidLeaveMinutes += record.scheduledMinutes || profile.standardMinutesPerDay;
+      else if (([AttendanceStatus.PRESENT, AttendanceStatus.LATE, AttendanceStatus.HALF_DAY] as AttendanceStatus[]).includes(record.status)) regularMinutes += record.scheduledMinutes ? record.regularMinutes : Math.min(record.workedMinutes, profile.standardMinutesPerDay);
       overtimeMinutes += record.overtimeMinutes;
     }
     const standardMonthMinutes = profile.standardWorkingDays * profile.standardMinutesPerDay;

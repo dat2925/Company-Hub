@@ -1,7 +1,7 @@
 'use client';
 
 import { useQuery } from '@tanstack/react-query';
-import { ArrowLeft, CalendarDays, CircleDot, ClipboardList, FileText, FolderKanban, Hash } from 'lucide-react';
+import { ArrowLeft, CalendarDays, CircleDot, ClipboardList, FileText, FolderKanban, Hash, Target } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 import { Link } from '@/i18n/navigation';
@@ -10,7 +10,9 @@ import { Item } from '@/types';
 import { configs } from '@/features/crud/config';
 import { CrudPage } from '@/features/crud/crud-page';
 
-type Tab = 'details' | 'issues';
+import { ProjectRequirements } from '@/features/talent/components/project-requirements';
+
+type Tab = 'details' | 'issues' | 'talent';
 
 const asDate = (value: unknown) => {
   if (typeof value !== 'string' || !value) return '—';
@@ -87,6 +89,14 @@ export function ProjectDetail({ projectId }: { projectId: string }) {
             >
               <ClipboardList size={18} /> {t('projectDetail.tabs.issues')}
             </button>
+            <button
+              role="tab"
+              aria-selected={tab === 'talent'}
+              onClick={() => setTab('talent')}
+              className={`flex items-center gap-2 px-5 py-3 rounded-t-2xl font-black text-sm transition-all ${tab === 'talent' ? 'bg-white text-indigo-600 border border-b-white border-slate-200 -mb-px' : 'text-slate-500 hover:text-indigo-600'}`}
+            >
+              <Target size={18} /> Năng lực cần thiết
+            </button>
           </div>
         </div>
 
@@ -106,7 +116,7 @@ export function ProjectDetail({ projectId }: { projectId: string }) {
                 <p className="text-slate-700 font-medium whitespace-pre-wrap leading-7">{String(data.description ?? t('projectDetail.noDescription'))}</p>
               </div>
             </div>
-          ) : (
+          ) : tab === 'issues' ? (
             <div role="tabpanel">
               <CrudPage
                 config={configs.issues}
@@ -115,6 +125,10 @@ export function ProjectDetail({ projectId }: { projectId: string }) {
                 hiddenFields={['projectId']}
                 embedded
               />
+            </div>
+          ) : (
+            <div role="tabpanel">
+              <ProjectRequirements projectId={projectId} />
             </div>
           )}
         </div>

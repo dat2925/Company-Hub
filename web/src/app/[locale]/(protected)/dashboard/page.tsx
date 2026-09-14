@@ -17,6 +17,7 @@ import { useTranslations, useLocale } from 'next-intl';
 import { useState, useEffect } from 'react';
 import { useAuth } from '@/features/auth/auth-context';
 import { api } from '@/lib/api/client';
+import { Link } from '@/i18n/navigation';
 
 const iconMap = {
   totalCompanies: Building2,
@@ -38,6 +39,17 @@ const styleMap: Record<string, { gradient: string; shadow: string; text: string;
   upcomingMeetings: { gradient: 'from-rose-500 to-pink-600', shadow: 'shadow-rose-500/30', text: 'text-rose-600', bgSoft: 'bg-rose-50/70' },
   totalBulletins: { gradient: 'from-teal-500 to-emerald-600', shadow: 'shadow-teal-500/30', text: 'text-teal-600', bgSoft: 'bg-teal-50/70' },
   totalNotifications: { gradient: 'from-fuchsia-600 to-purple-600', shadow: 'shadow-fuchsia-500/30', text: 'text-fuchsia-600', bgSoft: 'bg-fuchsia-50/70' }
+};
+
+const routeMap: Record<string, string> = {
+  totalCompanies: '/companies',
+  activeCompanies: '/companies',
+  totalDepartments: '/departments',
+  totalEmployees: '/employees',
+  totalProjects: '/projects',
+  upcomingMeetings: '/meetings',
+  totalBulletins: '/bulletins',
+  totalNotifications: '/notifications'
 };
 
 export default function Dashboard() {
@@ -110,17 +122,17 @@ export default function Dashboard() {
             </h1>
 
             <p className="text-indigo-200/90 text-base sm:text-lg mt-4 max-w-2xl font-medium leading-relaxed">
-              Welcome back to your high-performance enterprise hub. Real-time telemetry, company velocity, and team spotlights at your fingertips.
+              {t('dashboard.heroDescription')}
             </p>
 
             <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
               <span className="px-4 py-2 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 text-xs font-black text-indigo-100 flex items-center gap-2 shadow-sm">
                 <ShieldCheck size={16} className="text-emerald-400" />
-                Role: {user ? t(`roles.${user.role}`) : 'User'}
+                {t('dashboard.roleLabel')}: {user ? t(`roles.${user.role}`) : 'User'}
               </span>
               <span className="px-4 py-2 rounded-2xl bg-emerald-500/20 backdrop-blur-md border border-emerald-500/30 text-xs font-black text-emerald-300 flex items-center gap-2 shadow-sm">
                 <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
-                Dragon Engine Active
+                {t('dashboard.dragonEngineActive')}
               </span>
 
             </div>
@@ -146,8 +158,9 @@ export default function Dashboard() {
               const Icon = iconMap[k as keyof typeof iconMap];
               const styles = styleMap[k] ?? styleMap.totalCompanies;
               return (
-                <article
-                  className={`stagger-item delay-${((idx % 5) + 2) * 100} card p-7 relative overflow-hidden bg-white/80 backdrop-blur-2xl hover-extreme-3d glow-card border border-white/90 flex flex-col justify-between h-52 group cursor-default`}
+                <Link
+                  href={routeMap[k] ?? '#'}
+                  className={`stagger-item delay-${((idx % 5) + 2) * 100} card p-7 relative overflow-hidden bg-white/80 backdrop-blur-2xl hover-extreme-3d glow-card border border-white/90 flex flex-col justify-between h-52 group block cursor-pointer`}
                   key={k}
                 >
                   <div className="absolute -right-8 -top-8 w-36 h-36 rounded-full opacity-15 blur-2xl pointer-events-none bg-gradient-to-br transition-all duration-500 group-hover:opacity-35 group-hover:scale-125"></div>
@@ -172,7 +185,7 @@ export default function Dashboard() {
                     </p>
                     <ChevronRight size={18} className={`opacity-40 group-hover:opacity-100 group-hover:translate-x-1 transition-all duration-300 ${styles.text}`} />
                   </div>
-                </article>
+                </Link>
               );
             })}
           </div>
@@ -219,6 +232,7 @@ export default function Dashboard() {
 }
 
 function Recent({ title, items, icon: Icon, delayClass }: { title: string; items: unknown; icon: React.ElementType; delayClass: string }) {
+  const tCommon = useTranslations('common');
   return (
     <div className={`stagger-item ${delayClass} card p-8 bg-white/80 backdrop-blur-2xl border border-white/90 glow-card hover-extreme-3d flex flex-col h-full`}>
       <h2 className="font-black text-2xl text-slate-900 mb-6 flex items-center gap-3 title-gradient w-fit">
@@ -242,7 +256,7 @@ function Recent({ title, items, icon: Icon, delayClass }: { title: string; items
       ) : (
         <div className="flex-1 flex items-center justify-center p-8">
           <p className="text-slate-400 font-bold text-sm bg-slate-50/70 px-6 py-3 rounded-full border border-slate-100">
-            No items available
+            {tCommon('empty')}
           </p>
         </div>
       )}

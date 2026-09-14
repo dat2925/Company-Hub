@@ -9,6 +9,7 @@ import { api } from '@/lib/api/client';
 import { Item } from '@/types';
 import { ResourceConfig } from './config';
 import { ResourceForm } from './resource-form';
+import { Portal } from '@/components/ui/portal';
 
 type Mode = 'create' | 'edit' | 'view' | 'delete' | 'admin' | null;
 
@@ -323,8 +324,9 @@ export function CrudPage({ config, queryParams, fixedValues, hiddenFields = [], 
 
       {/* Modal Dialog */}
       {mode && (
-        <div className="modal-bg" role="dialog" aria-modal="true">
-          <div className="modal border border-white/80 bg-white/95 shadow-2xl relative overflow-hidden">
+        <Portal>
+          <div className="modal-bg" role="dialog" aria-modal="true">
+            <div className="modal border border-white/80 bg-white/95 shadow-2xl relative overflow-hidden">
             <div className="flex justify-between items-center pb-5 mb-6 border-b border-slate-100 relative z-10">
               <h2 className="text-2xl font-black text-slate-900 tracking-tight">
                 {t(`common.modal.${mode}`)} · <span className="title-gradient">{t(`${config.key}.title`)}</span>
@@ -340,12 +342,16 @@ export function CrudPage({ config, queryParams, fixedValues, hiddenFields = [], 
             <div className="relative z-10">
               {mode === 'view' && selected ? (
                 <dl className="grid md:grid-cols-2 gap-4">
-                  {formConfig.fields.filter(field => field.name !== 'password').map(field => (
-                    <div key={field.name} className="bg-slate-50/80 p-4 rounded-2xl border border-slate-200/60 shadow-xs">
-                      <dt className="text-[10px] font-black text-indigo-500 uppercase tracking-widest">{t(`fields.${field.name}`)}</dt>
-                      <dd className="font-bold text-slate-800 mt-1.5 text-base break-words">{display(selected[field.name], t)}</dd>
-                    </div>
-                  ))}
+                  {formConfig.fields.filter(field => field.name !== 'password').map(field => {
+                    const objectKey = field.name.endsWith('Id') ? field.name.replace(/Id$/, '') : field.name;
+                    const valueToDisplay = (field.name.endsWith('Id') && selected[objectKey]) ? selected[objectKey] : selected[field.name];
+                    return (
+                      <div key={field.name} className="bg-slate-50/80 p-4 rounded-2xl border border-slate-200/60 shadow-xs">
+                        <dt className="text-[10px] font-black text-indigo-500 uppercase tracking-widest">{t(`fields.${field.name}`)}</dt>
+                        <dd className="font-bold text-slate-800 mt-1.5 text-base break-words">{display(valueToDisplay, t)}</dd>
+                      </div>
+                    );
+                  })}
                 </dl>
               ) : mode === 'delete' ? (
                 <div className="text-center p-4">
@@ -376,6 +382,7 @@ export function CrudPage({ config, queryParams, fixedValues, hiddenFields = [], 
             </div>
           </div>
         </div>
+        </Portal>
       )}
     </section>
   );
