@@ -10,13 +10,14 @@ import {
   Mail,
   Zap,
   ShieldCheck,
-  Building2,
-  Briefcase,
-  Users,
   LineChart,
   MessageSquare,
   CalendarDays,
-  SkipForward
+  SkipForward,
+  Building2,
+  GraduationCap,
+  BriefcaseBusiness,
+  Users
 } from 'lucide-react';
 import { useLocale, useTranslations } from 'next-intl';
 import { useState, useEffect } from 'react';
@@ -31,46 +32,48 @@ const schema = z.object({
 });
 type Form = z.infer<typeof schema>;
 
-// --- CINEMATIC INTRO COMPONENT ---
+// --- EXTENDED CINEMATIC INTRO COMPONENT ---
 function CinematicIntro({ onComplete }: { onComplete: () => void }) {
   const [phase, setPhase] = useState(0);
   const [skipped, setSkipped] = useState(false);
 
   useEffect(() => {
     // Check if user has already seen intro this session
-    const hasSeenIntro = sessionStorage.getItem('corpAllIntroSeen');
+    const hasSeenIntro = sessionStorage.getItem('soloTechIntroSeen');
     if (hasSeenIntro) {
       setSkipped(true);
       onComplete();
       return;
     }
 
-    // Sequence Timeline
-    const t1 = setTimeout(() => setPhase(1), 2000); // Phase 1: Features Reveal
-    const t2 = setTimeout(() => setPhase(2), 4000); // Phase 2: Growth Chart
-    const t3 = setTimeout(() => {
-      setPhase(3); // Fade out overlay
-      sessionStorage.setItem('corpAllIntroSeen', 'true');
+    // Extended Sequence Timeline (14 seconds total)
+    const t1 = setTimeout(() => setPhase(1), 3500); // 3.5s: Ecosystem (EduNest & CorpAll)
+    const t2 = setTimeout(() => setPhase(2), 7500); // 7.5s: Zoom into CorpAll + Features Burst
+    const t3 = setTimeout(() => setPhase(3), 10500); // 10.5s: Growth Chart
+    const t4 = setTimeout(() => {
+      setPhase(4); // 13.5s: Fade out overlay
+      sessionStorage.setItem('soloTechIntroSeen', 'true');
       setTimeout(onComplete, 1000); // Allow fade out to finish
-    }, 6500);
+    }, 13500);
 
     return () => {
       clearTimeout(t1);
       clearTimeout(t2);
       clearTimeout(t3);
+      clearTimeout(t4);
     };
   }, [onComplete]);
 
   const handleSkip = () => {
     setSkipped(true);
-    sessionStorage.setItem('corpAllIntroSeen', 'true');
+    sessionStorage.setItem('soloTechIntroSeen', 'true');
     onComplete();
   };
 
   if (skipped) return null;
 
   return (
-    <div className={`fixed inset-0 z-50 flex items-center justify-center bg-[#05050a] transition-opacity duration-1000 ease-in-out ${phase >= 3 ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
+    <div className={`fixed inset-0 z-50 flex items-center justify-center bg-[#030305] transition-opacity duration-1000 ease-in-out overflow-hidden ${phase >= 4 ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
       
       {/* Skip Button */}
       <button 
@@ -80,59 +83,89 @@ function CinematicIntro({ onComplete }: { onComplete: () => void }) {
         SKIP INTRO <SkipForward size={14} />
       </button>
 
-      {/* PHASE 0 & 1: Swarm of Companies splitting */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none flex items-center justify-center">
-        {[...Array(40)].map((_, i) => {
-          const isLeft = i % 2 === 0;
-          return (
-            <div
-              key={`company-${i}`}
-              className={`absolute transition-all duration-[2000ms] ease-in-out ${
-                phase >= 1 
-                  ? (isLeft ? '-translate-x-[150vw] opacity-0' : 'translate-x-[150vw] opacity-0') 
-                  : 'translate-x-0 opacity-100'
-              }`}
-              style={{
-                left: `${10 + Math.random() * 80}%`,
-                top: `${10 + Math.random() * 80}%`,
-                transform: phase === 0 ? `scale(${0.5 + Math.random() * 2}) translateZ(0)` : undefined,
-                transitionDelay: `${Math.random() * 300}ms`
-              }}
-            >
-              <div className="text-indigo-500/30">
-                {i % 3 === 0 ? <Building2 size={40} /> : i % 3 === 1 ? <Briefcase size={36} /> : <Globe size={42} />}
-              </div>
-            </div>
-          );
-        })}
+      {/* PHASE 0: SOLO Tech Origins (0s - 3.5s) */}
+      <div className={`absolute inset-0 flex flex-col items-center justify-center transition-all duration-1000 ease-in-out ${phase === 0 ? 'opacity-100 scale-100' : phase >= 1 ? 'opacity-0 scale-75 blur-md -translate-y-20' : 'opacity-0'}`}>
+        <div className="relative group">
+          <div className="absolute -inset-4 bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 rounded-full blur-3xl opacity-40 animate-pulse-slow"></div>
+          <h1 className="relative text-7xl md:text-9xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white via-blue-100 to-indigo-200 tracking-tighter drop-shadow-2xl mb-4 text-center">
+            SOLO Tech
+          </h1>
+        </div>
+        <div className="flex flex-col items-center gap-2 mt-4 animate-fade-in-down animation-delay-1000">
+          <div className="h-[1px] w-32 bg-gradient-to-r from-transparent via-blue-400 to-transparent"></div>
+          <p className="text-lg md:text-2xl font-medium text-blue-200/80 tracking-widest uppercase">
+            Thành lập năm 2026
+          </p>
+          <p className="text-sm md:text-lg font-bold text-indigo-400/90 tracking-widest flex items-center gap-2">
+            <Globe size={16} /> TẠI HÀ NỘI
+          </p>
+          <div className="h-[1px] w-32 bg-gradient-to-r from-transparent via-blue-400 to-transparent mt-2"></div>
+        </div>
       </div>
 
-      {/* PHASE 1: Features Reveal */}
-      <div className={`absolute inset-0 flex items-center justify-center transition-all duration-1000 ${phase === 1 ? 'opacity-100 scale-100' : phase > 1 ? 'opacity-0 scale-150 blur-xl' : 'opacity-0 scale-50'}`}>
-        <div className="relative w-full max-w-4xl h-[400px]">
-          {/* Central Hub */}
-          <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 bg-cyan-500/20 border border-cyan-400/50 rounded-3xl backdrop-blur-xl flex items-center justify-center shadow-[0_0_50px_rgba(6,182,212,0.5)] animate-pulse-slow">
-            <Zap size={48} className="text-cyan-300" />
+      {/* PHASE 1: The Ecosystem - EduNest & CorpAll (3.5s - 7.5s) */}
+      <div className={`absolute inset-0 flex flex-col items-center justify-center transition-all duration-1500 ease-in-out ${phase === 1 ? 'opacity-100 scale-100' : phase > 1 ? 'opacity-0 scale-150 blur-xl' : 'opacity-0 scale-50 translate-y-20'}`}>
+        
+        <h2 className="absolute top-20 text-2xl font-black text-white/50 tracking-widest uppercase animate-pulse-slow">
+          Hệ Sinh Thái Sản Phẩm
+        </h2>
+
+        <div className="flex flex-col md:flex-row gap-8 md:gap-16 items-center justify-center w-full max-w-6xl px-8">
+          {/* EduNest Card */}
+          <div className="w-full md:w-1/2 max-w-md p-8 rounded-3xl bg-amber-500/10 border border-amber-400/30 backdrop-blur-xl flex flex-col items-center text-center gap-6 shadow-[0_0_50px_rgba(245,158,11,0.15)] animate-float">
+            <div className="w-20 h-20 bg-amber-500/20 rounded-2xl flex items-center justify-center border border-amber-400/50">
+              <GraduationCap size={40} className="text-amber-400" />
+            </div>
+            <div>
+              <h3 className="text-3xl font-black text-amber-100 mb-2 tracking-tight">EduNest</h3>
+              <p className="text-amber-200/70 font-medium uppercase tracking-widest text-sm">Quản Lý Giáo Dục</p>
+            </div>
           </div>
-          
-          {/* Floating Feature Cards */}
-          <div className="absolute top-10 left-10 p-4 rounded-2xl bg-indigo-600/20 border border-indigo-400/30 backdrop-blur-md flex items-center gap-3 animate-float animation-delay-1000">
-            <MessageSquare className="text-indigo-300" /> <span className="text-white font-bold tracking-widest">COMMUNICATION</span>
-          </div>
-          <div className="absolute bottom-10 left-20 p-4 rounded-2xl bg-purple-600/20 border border-purple-400/30 backdrop-blur-md flex items-center gap-3 animate-float animation-delay-2000">
-            <Users className="text-purple-300" /> <span className="text-white font-bold tracking-widest">HR MANAGEMENT</span>
-          </div>
-          <div className="absolute top-20 right-10 p-4 rounded-2xl bg-emerald-600/20 border border-emerald-400/30 backdrop-blur-md flex items-center gap-3 animate-float animation-delay-1500">
-            <LineChart className="text-emerald-300" /> <span className="text-white font-bold tracking-widest">ANALYTICS</span>
-          </div>
-          <div className="absolute bottom-20 right-20 p-4 rounded-2xl bg-rose-600/20 border border-rose-400/30 backdrop-blur-md flex items-center gap-3 animate-float">
-            <CalendarDays className="text-rose-300" /> <span className="text-white font-bold tracking-widest">SCHEDULING</span>
+
+          {/* CorpAll Card */}
+          <div className="w-full md:w-1/2 max-w-md p-8 rounded-3xl bg-cyan-500/10 border border-cyan-400/30 backdrop-blur-xl flex flex-col items-center text-center gap-6 shadow-[0_0_50px_rgba(6,182,212,0.15)] animate-float animation-delay-1000">
+            <div className="w-20 h-20 bg-cyan-500/20 rounded-2xl flex items-center justify-center border border-cyan-400/50">
+              <BriefcaseBusiness size={40} className="text-cyan-400" />
+            </div>
+            <div>
+              <h3 className="text-3xl font-black text-cyan-100 mb-2 tracking-tight">CorpAll</h3>
+              <p className="text-cyan-200/70 font-medium uppercase tracking-widest text-sm">Quản Lý Doanh Nghiệp</p>
+            </div>
           </div>
         </div>
       </div>
 
-      {/* PHASE 2: Dramatic Growth */}
-      <div className={`absolute inset-0 flex flex-col items-center justify-center transition-opacity duration-1000 ${phase >= 2 ? 'opacity-100' : 'opacity-0'}`}>
+      {/* PHASE 2: Zoom into CorpAll + Features Burst (7.5s - 10.5s) */}
+      <div className={`absolute inset-0 flex items-center justify-center transition-all duration-1000 ease-out ${phase === 2 ? 'opacity-100 scale-100' : phase > 2 ? 'opacity-0 scale-125 blur-xl' : 'opacity-0 scale-50'}`}>
+        <div className="relative w-full max-w-4xl h-[500px]">
+          
+          {/* Central Hub (CorpAll representation) */}
+          <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-40 h-40 bg-cyan-500/20 border border-cyan-400/50 rounded-[2rem] backdrop-blur-2xl flex flex-col items-center justify-center shadow-[0_0_100px_rgba(6,182,212,0.6)] animate-pulse-slow">
+            <Zap size={48} className="text-cyan-300 mb-2" />
+            <span className="text-white font-black tracking-widest">CorpAll</span>
+          </div>
+          
+          {/* Exploding Feature Cards */}
+          <div className={`absolute top-10 left-10 p-4 rounded-2xl bg-indigo-600/20 border border-indigo-400/30 backdrop-blur-md flex items-center gap-3 transition-all duration-1000 ${phase === 2 ? 'translate-x-0 translate-y-0 opacity-100' : 'translate-x-[200px] translate-y-[200px] opacity-0'}`}>
+            <MessageSquare className="text-indigo-300" /> <span className="text-white font-bold tracking-widest uppercase">Giao tiếp</span>
+          </div>
+          <div className={`absolute bottom-10 left-10 p-4 rounded-2xl bg-purple-600/20 border border-purple-400/30 backdrop-blur-md flex items-center gap-3 transition-all duration-1000 delay-100 ${phase === 2 ? 'translate-x-0 translate-y-0 opacity-100' : 'translate-x-[200px] -translate-y-[200px] opacity-0'}`}>
+            <Users className="text-purple-300" /> <span className="text-white font-bold tracking-widest uppercase">Nhân sự</span>
+          </div>
+          <div className={`absolute top-20 right-10 p-4 rounded-2xl bg-emerald-600/20 border border-emerald-400/30 backdrop-blur-md flex items-center gap-3 transition-all duration-1000 delay-200 ${phase === 2 ? 'translate-x-0 translate-y-0 opacity-100' : '-translate-x-[200px] translate-y-[200px] opacity-0'}`}>
+            <LineChart className="text-emerald-300" /> <span className="text-white font-bold tracking-widest uppercase">Phân tích</span>
+          </div>
+          <div className={`absolute bottom-20 right-10 p-4 rounded-2xl bg-rose-600/20 border border-rose-400/30 backdrop-blur-md flex items-center gap-3 transition-all duration-1000 delay-300 ${phase === 2 ? 'translate-x-0 translate-y-0 opacity-100' : '-translate-x-[200px] -translate-y-[200px] opacity-0'}`}>
+            <CalendarDays className="text-rose-300" /> <span className="text-white font-bold tracking-widest uppercase">Lên lịch</span>
+          </div>
+          <div className={`absolute -top-10 left-1/2 -translate-x-1/2 p-4 rounded-2xl bg-amber-600/20 border border-amber-400/30 backdrop-blur-md flex items-center gap-3 transition-all duration-1000 delay-500 ${phase === 2 ? 'translate-y-0 opacity-100' : 'translate-y-[200px] opacity-0'}`}>
+            <Building2 className="text-amber-300" /> <span className="text-white font-bold tracking-widest uppercase">Vận hành</span>
+          </div>
+        </div>
+      </div>
+
+      {/* PHASE 3: Dramatic Growth (10.5s - 13.5s) */}
+      <div className={`absolute inset-0 flex flex-col items-center justify-center transition-opacity duration-1000 ${phase >= 3 ? 'opacity-100' : 'opacity-0'}`}>
         <div className="relative w-full max-w-5xl h-[500px]">
           <svg className="w-full h-full overflow-visible" viewBox="0 0 1000 500">
             <defs>
@@ -142,7 +175,7 @@ function CinematicIntro({ onComplete }: { onComplete: () => void }) {
                 <stop offset="100%" stopColor="#10b981" />
               </linearGradient>
               <filter id="glow">
-                <feGaussianBlur stdDeviation="8" result="coloredBlur"/>
+                <feGaussianBlur stdDeviation="12" result="coloredBlur"/>
                 <feMerge>
                   <feMergeNode in="coloredBlur"/>
                   <feMergeNode in="SourceGraphic"/>
@@ -153,16 +186,16 @@ function CinematicIntro({ onComplete }: { onComplete: () => void }) {
               d="M 50,450 Q 200,450 400,300 T 700,100 L 950,50" 
               fill="none" 
               stroke="url(#growthGrad)" 
-              strokeWidth="12" 
+              strokeWidth="16" 
               strokeLinecap="round"
               filter="url(#glow)"
-              className={`transition-all duration-[2000ms] ease-out ${phase >= 2 ? 'growth-line-active' : 'growth-line-hidden'}`}
+              className={`transition-all duration-[2000ms] ease-out ${phase >= 3 ? 'growth-line-active' : 'growth-line-hidden'}`}
             />
           </svg>
         </div>
-        <div className={`absolute bottom-32 transition-all duration-1000 delay-500 ${phase >= 2 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+        <div className={`absolute bottom-32 transition-all duration-1000 delay-500 ${phase >= 3 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
           <h1 className="text-5xl md:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 via-purple-300 to-emerald-300 tracking-tighter drop-shadow-2xl">
-            EXPONENTIAL GROWTH
+            KẾT QUẢ: TĂNG TRƯỞNG
           </h1>
         </div>
       </div>
